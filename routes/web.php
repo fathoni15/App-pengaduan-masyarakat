@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/petugas/listSelesai', [PC::class, 'listSelesai'])->name('petugas.listSelesai');
         Route::patch('/petugas/proses/{id}', [PC::class, 'proses'])->name('petugas.proses');
         Route::get('/petugas/selesai/{id}', [PC::class, 'selesai'])->name('petugas.selesai');
+        Route::get('/petugas/add', [PC::class, 'create'])->name('petugas.create');
+        Route::post('/petugas/store', [PC::class, 'store'])->name('petugas.store');
     });
 
     Route::group(['middleware' => 'masyarakat'], function(){

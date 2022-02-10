@@ -57,7 +57,8 @@ class PetugasController extends Controller
 
     public function create()
     {
-        //
+        $data = Pengaduan::all();
+        return view('petugas.buat', compact('data'));
     }
 
     /**
@@ -68,7 +69,21 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'foto'=>'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $imgname = $request->foto->getClientOriginalName();
+        $request->foto->move(public_path('image'), $imgname);
+
+        Pengaduan::create([
+            'nik'=>$request->nik,
+            'tgl_kejadian'=>$request->tgl_kejadian,
+            'isi_laporan'=>$request->isi_laporan,
+            'foto'=>$imgname,
+        ]);
+
+        return redirect()->route('petugas.listPengaduan');
     }
 
     /**

@@ -27,7 +27,13 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{ $dt->created_at->diffForHumans() }}</td>
                         <td>{{$dt->nik}}</td>
-                        <td>{{$dt->user->name}}</td>
+                        <td>
+                            @if ($dt->user == NULL)
+                                User ini belum terdaftar
+                            @else
+                                {{$dt->user->name}}
+                            @endif
+                        </td>
                         <td>{{$dt->isi_laporan}}</td>
                         <td><a href="{{ asset('image/'.$dt->foto) }}" target="_blank">Lihat</a></td>
                         <td>
